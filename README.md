@@ -28,7 +28,7 @@ Performance comparison (accuracy vs time)
 
 
 💡 Dataset
-Titanic dataset sourced from Data Science Dojo on GitHub.
+Titanic dataset :- 'https://raw.githubusercontent.com/datasciencedojo/datasets/master/titanic.csv'
 
 
 🚀 How to Run
