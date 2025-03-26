@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+     <meta charset="UTF-8">
+     <title>Hyperparameter Tuning Tutorial</title>
+     <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            background-color: #f9f9f9;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        video {
+            width: 100%;
+            margin-bottom: 20px;
+            border: 2px solid #ccc;
+            border-radius: 6px;
+        }
+        .transcript {
+            background: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+            white-space: pre-wrap;
+            font-size: 16px;
+        }
+    </style>
+
+
+ </head>
+ <body>
+ 
+     <h1>Hyperparameter Tuning: Grid Search vs. Random Search</h1>
+     <h2>By Arpita Thokal – Student ID: 24005907</h2>
+     <h2>
+        GitHub:
+        <a href="https://github.com/arpitathokal/Hyperparameter_Tunning_ML" target="_blank">
+          https://github.com/arpitathokal/Hyperparameter_Tunning_ML
+        </a>
+      </h2>
+      
+ 
+     <video controls>
+         <source src="ML_Video01.mp4" type="video/mp4">
+         Your browser does not support the video tag.
+     </video>
+ 
+     <div class="transcript">
+        <h2>Transcript</h2>
+    
+        <p><strong>⏱️ 00:00 – Slide 1: Title Slide</strong><br>
+            "Hi everyone! My name is Arpita Thokal, and welcome to my tutorial on Hyperparameter Tuning: Grid Search vs. Random Search.
+            In this short video, I’ll walk you through what hyperparameters are, why they matter, and how to tune them effectively using two popular methods.
+            So let’s dive in and find the best hyperparameters — efficiently!"
+            <br><br>
+    
+        <strong>⏱️ 00:28 – Slide 2: Agenda</strong><br>
+        "Here’s a quick overview of what we’ll cover.
+        We’ll start with a quick introduction to hyperparameter tuning.
+        Next, we’ll break down two widely used tuning methods: Grid Search and Random Search.
+        I’ll show you a hands-on implementation using Python on the Titanic dataset using a Random Forest model,
+        compare the results, and wrap up with a few key takeaways.
+        Let’s get started!"
+        <br><br>
+    
+        <strong>⏱️ 00:57 – Slide 3: What is Hyperparameter Tuning?</strong><br>
+        "Hyperparameters are configuration settings that control how a machine learning model learns.
+        They are not learned from the data and must be set before training.
+        If set poorly, a model might underfit or overfit, leading to poor performance on new data.
+        Hyperparameter tuning helps us find the best combination for optimal results."
+        <br><br>
+    
+        <strong>⏱️ 01:26 – Slide 4: Examples of Hyperparameters</strong><br>
+        "Random Forest is a machine learning model that uses many decision trees to improve predictions.
+        In Random Forest, hyperparameters include:
+        ✔️ n_estimators 
+        ✔️ max_depth 
+        ✔️ min_samples_split
+        If these are set poorly, we again risk underfitting or overfitting."
+        <br><br>
+    
+        <strong>⏱️ 01:55 – Slide 5: Cooking Analogy</strong><br>
+        "Think of hyperparameter tuning like cooking.
+        Too much spice or too little salt ruins the dish.
+        Similarly, poorly tuned hyperparameters can ruin model performance."
+        <br><br>
+    
+        <strong>⏱️ 02:24 – Slide 6: What is Grid Search?</strong><br>
+        "Grid Search is a brute-force approach.
+        It tests all combinations of hyperparameter values to find the best.
+        Imagine trying every possible combination of dishes in a restaurant — it's effective but takes time.
+        That’s Grid Search."
+        <br><br>
+    
+        <strong>⏱️ 02:53 – Slide 7: How Grid Search Works</strong><br>
+        "Here’s how it works:
+        Let’s say we want to tune n_estimators with values 50, 100, and 150 — and max_depth with values 10, 20, and None.
+        Grid Search will try every combination — that’s 3 times 3, or 9 different models.
+        "
+        <br><br>
+    
+        <strong>⏱️ 03:21 – Slide 8: Grid Search Grid Layout</strong><br>
+        "This grid shows the 9 combinations visually.
+        Even if one hyperparameter doesn’t affect performance much, 
+        Grid Search still tests it — which can be inefficient and slow."
+        <br><br>
+    
+        <strong>⏱️ 03:50 – Slide 9: What is Random Search?</strong><br>
+        "Random Search takes a smarter shortcut.
+        Instead of testing every combination, it selects a few random ones and tests just those.
+        This saves time and resources."
+        .<br><br>
+    
+        <strong>⏱️ 04:19 – Slide 10: Lottery Analogy</strong><br>
+        "Think of Random Search like picking lottery tickets.
+        Each ticket is a hyperparameter combo.
+        You don’t need to try all of them — just a few random ones to get a good result."
+        <br><br>
+    
+        <strong>⏱️ 04:48 – Slide 11: How Random Search Works</strong><br>
+        "In Random Search, we still define ranges like:
+        ✔️ n_estimators = np.arange(50, 200, 50)
+        ✔️ max_depth = [None, 10, 20]
+        But we might test only 5 combinations instead of all 9 — making it much faster."
+        <br><br>
+    
+        <strong>⏱️ 05:17 – Slide 12: Grid vs. Random Search</strong><br>
+        "Let’s compare.
+        Grid Search is thorough and reliable, but slow and resource-heavy.
+        Random Search is faster, efficient, and often just as effective — though it doesn’t always find the absolute best combination."
+        <br><br>
+    
+        <strong>⏱️ 05:46 – Slide 13: Implementation in Python</strong><br>
+        Now let’s look at how we implemented this in Python.
+        1st
+        "First, I imported all necessary libraries — pandas and numpy for data handling, matplotlib and seaborn for visualizations, and scikit-learn for building and tuning the model."
+        ________________________________________
+        2nd
+        "Then I loaded the Titanic dataset from GitHub and quickly previewed the first few rows to understand the structure of the data."
+        ________________________________________
+        3rd
+        "I selected relevant features for training — mostly numerical or already one-hot encoded — and set Survived as the target variable."
+        ________________________________________
+        6th
+        "To prepare the data, I dropped rows with missing target values and applied one-hot encoding to convert categorical columns into numeric format."
+        ________________________________________
+        7th
+        "Next, I split the data into training and testing sets, with 80% used for training and 20% for testing, ensuring reproducibility with a fixed random state."
+        ________________________________________
+        8th
+        "Before tuning, I trained a basic Random Forest using default settings. The baseline accuracy was 0.8101 — decent, but we want to improve it through tuning."
+        ________________________________________
+        9th (Grid Search)
+        "I defined a parameter grid to tune n_estimators, max_depth, and min_samples_split, and used GridSearchCV to evaluate all 27 combinations using 5-fold cross-validation — totaling 135 model fits."
+        "Grid Search slightly improved the accuracy to 0.8212, but took 12.76 seconds to complete — making it more computationally expensive."
+        ________________________________________
+        10th (Random Search)
+        "Using the same parameter range, I applied Random Search with just 5 random combinations."
+        "This reduced model evaluations to only 25 fits and cut time down to 2.77 seconds — nearly 3x faster."
+        "Surprisingly, it matched Grid Search with the same accuracy of 0.8212."
+
+        <br><br>
+    
+        <strong>⏱️ 06:15 – Slide 14: Performance Comparison</strong><br>
+        "Both Grid Search and Random Search gave us the same accuracy — around 82%.
+        But Random Search was 3 times faster.
+        So, for this task, Random Search was the more efficient choice."
+        <br><br>
+    
+        <strong>⏱️ 06:43 – Slide 15: Final Takeaways</strong><br>
+        "To wrap up:
+        ✅ Hyperparameter tuning improves model performance.
+        ✅ Grid Search is exhaustive but slow.
+        ✅ Random Search is faster and often just as effective.
+        Choose your method based on time, data size, and complexity."
+        <br><br>
+    
+        <strong>⏱️ 07:12 – Slide 16: Thank You</strong><br>
+        "Thank you for watching!
+        I hope this tutorial helped you understand how to tune hyperparameters using Grid and Random Search.
+        You can find all the code and materials on my GitHub — linked below.
+        Happy tuning!" <br><br>
+
+        </p>
+    </div>
+    
+ 
+ </body>
+ </html>
+
+ 
