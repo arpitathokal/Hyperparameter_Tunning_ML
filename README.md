@@ -35,9 +35,6 @@ Titanic dataset :- 'https://raw.githubusercontent.com/datasciencedojo/datasets/m
 Clone the repository:
 git clone https://github.com/arpitathokal/Hyperparameter_Tunning_ML.git
 
-Install required packages:
-pip install -r requirements.txt
-
 Open the notebook:
 jupyter notebook Hyperparameter_Tunning.ipynb
 
